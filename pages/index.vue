@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <div class="hero is-danger">
+    <div class="hero is-medium is-dark is-bold">
       <div class="hero-body">
         <div class="container">
           <h1 class="title is-1">개사랑</h1>
@@ -12,14 +12,14 @@
 
     <div class="columns">
       <div class="column">
-        <div class="notification is-danger">
+        <div class="notification is-medium is-dark is-bold">
           <figure class="image is-squre">
             <img src="https://s7d1.scene7.com/is/image/PETCO/puppy-090517-dog-featured-355w-200h-d" alt="">
           </figure>
         </div>
       </div>
       <div class="column">
-        <div class="message is-danger">
+        <div class="message is-medium is-dark is-bold">
           <div class="message-header">
             <p>오늘의 개 사진</p>
           </div>
@@ -79,7 +79,16 @@
           </div>
     </article>
 
-    
+    <div class="box">
+        <h1 class="title">보고 싶은 개 정보를 누르세요.</h1>
+        <span v-for="dog in dogs" v-bind:key="dog">
+          <a href="#" class="button is-dark">
+            {{dog}}
+          </a> &nbsp;
+        </span>
+      </div>
+  
+  
   </section>
 </template>
 
@@ -91,7 +100,8 @@
     },
     async asyncData() {
       const myImage = await axios.get('https://dog.ceo/api/breeds/image/random');
-      return { image: myImage.data.message };
+      const myDogs = await axios.get('https://dog.ceo/api/breeds/list');
+      return { image: myImage.data.message, dogs: myDogs.data.message };
     }
   };
 
